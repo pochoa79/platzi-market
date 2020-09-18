@@ -42,6 +42,12 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoriId}")
+    @ApiOperation("Seach a product with a categoriId")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Product not found")
+
+    })
     public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoriId") int categoryId) {
         return productService.getByCategory(categoryId).map(products -> new ResponseEntity<>(products, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
