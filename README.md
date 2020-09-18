@@ -1,2 +1,2 @@
 # platzi-market
-Servicios creando en Spring Boot
+Curso de Spring Boot
