@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ClienteRepository implements ClientRepository {
@@ -28,5 +29,10 @@ public class ClienteRepository implements ClientRepository {
     public Client save(Client client) {
         Cliente cliente = mapper.toCliente(client);
         return mapper.toClient(clienteCrudRepository.save(cliente));
+    }
+
+    @Override
+    public Optional<Client> findByIdCliente(String idCliente) {
+        return clienteCrudRepository.findById(idCliente).map(cliente -> mapper.toClient(cliente)) ;
     }
 }
