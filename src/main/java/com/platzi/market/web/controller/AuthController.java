@@ -4,6 +4,8 @@ import com.platzi.market.domain.dto.AuthenticationRequest;
 import com.platzi.market.domain.dto.AuthenticationRespond;
 import com.platzi.market.domain.service.PlaztiUserDetailService;
 import com.platzi.market.web.security.JWTUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,10 @@ public class AuthController {
     private JWTUtil jwtUtil;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationRespond> createToken(@RequestBody AuthenticationRequest request) {
+    @ApiOperation("Allows to authenticate JWT")
+    public ResponseEntity<AuthenticationRespond> createToken(
+            @ApiParam(value = "Object type AuthenticationRequest", required = true)
+            @RequestBody AuthenticationRequest request) {
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
